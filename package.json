@@ -1,0 +1,31 @@
+{
+  "name": "api-koa",
+  "version": "1.0.0",
+  "description": "Example of an API using Koa and node 7",
+  "main": "index.js",
+  "scripts": {
+    "start": "supervisor --harmony index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgmonda/api-koa.git"
+  },
+  "author": "Sergio Garcia Mondaray <sgmonda@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sgmonda/api-koa/issues"
+  },
+  "homepage": "https://github.com/sgmonda/api-koa#readme",
+  "dependencies": {
+    "cli-color": "^1.1.0",
+    "koa": "^2.0.0",
+    "supervisor": "^0.12.0",
+    "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.10.2"
+  },
+  "engines": {
+    "node": ">=7.1.0"
+  }
+}
