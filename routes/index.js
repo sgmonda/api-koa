@@ -1,16 +1,31 @@
 const KoaRouter = require('koa-router')();
 
-const routes = {
-  hello: require('./hello'),
-};
+const hello = require('./hello');
+const status = require('./status');
 
 const ROUTER = {
+  '/status': {
+    get: {handlers: status},
+  },
   '/hello/public': {
-    get: routes.hello.public,
+    get: {handlers: hello.public, public: true},
   },
   '/hello/private': {
-    get: routes.hello.private,
+    get: {handlers: hello.private},
   },
+};
+
+module.exports = (app) => {
+  for (let path in ROUTER) for (let method in ROUTER[path]) {
+    let handlers = ROUTER[path][method].handlers;
+    if (!ROUTER[path][method].public) handlers.unshift(privatize);
+    handlers.unshift(authentication);
+    for (let handler of handlers) {
+      KoaRouter[method](path, handler);
+    }
+  }
+  app.use(KoaRouter.routes());
+  app.use(KoaRouter.allowedMethods());
 };
 
 async function authentication (context, next) {
@@ -21,26 +36,7 @@ async function authentication (context, next) {
 
 async function privatize (context, next) {
   if (!context.state.token) {
-    throw {status: 401, message: 'Missing authorization header'};
+    throw [401, 'Missing authorization header'];
   }
   return next();
-}
-
-module.exports = (app) => {
-  for (let path in ROUTER) for (let method in ROUTER[path]) {
-    let handlers = ROUTER[path][method];
-    if (isPrivate(method, path)) handlers.unshift(privatize);
-    handlers.unshift(authentication);
-    for (let handler of handlers) {
-      KoaRouter[method](path, handler);
-    }
-  }
-  app.use(KoaRouter.routes());
-  app.use(KoaRouter.allowedMethods());
-};
-
-function isPrivate (method, path) {
-  if (/public/.test(path)) return false;
-  // @TODO Return false for public routes
-  return true;
 }

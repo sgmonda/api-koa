@@ -3,7 +3,7 @@ async function realHandler (context) {
   await mySlowTask();
   await mySlowTask();
   await mySlowTask();
-  return {a: 1, b: 2, c: 3};
+  return [200, {a: 1, b: 2, c: 3}];
 }
 
 function mySlowTask () {
