@@ -9,7 +9,7 @@ async function realHandler (context) {
 function mySlowTask () {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject('hello');
+      resolve('hello');
     }, 500);
   });
 }
