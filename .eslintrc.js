@@ -7,7 +7,13 @@ module.exports = {
     "ecmaVersion": 8,
     "sourceType": "module",
   },
-  'globals': {SETTINGS: true, log: true},
+  'globals': {
+    describe: true,
+    it: true,
+    log: true,
+    request: true,
+    SETTINGS: true,
+  },
   'extends' : 'eslint:recommended',
   'rules'   : {
     'array-callback-return'  : 'error',
