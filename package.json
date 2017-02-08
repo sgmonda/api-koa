@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "start": "supervisor --harmony index",
-    "test": "mocha --reporter spec test"
+    "test": "mocha --reporter spec test -- --harmony"
   },
   "repository": {
     "type": "git",

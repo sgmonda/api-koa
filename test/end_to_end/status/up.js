@@ -1,14 +1,8 @@
 const assert = require('assert');
 
-async function handler (done) {
-  assert.equal(true, true, 'status route returns a 200');
-  try {
-    let result = await request.get('/status');
-    console.log('RESULT', result);
-    done();
-  } catch (error) {
-    console.log('ERROR', error);
-  }
+async function handler () {
+  let result = await request('get', '/status');
+  assert.equal(result.statusCode, 200, 'Status code is 200');
 }
 
 module.exports = function () {

@@ -5,7 +5,7 @@ const routes = {
 
 module.exports = {
   '/status': {
-    get: {handlers: routes.status},
+    get: {handlers: routes.status, public: true},
   },
   '/hello/public': {
     get: {handlers: routes.hello.public, public: true},
