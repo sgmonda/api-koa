@@ -8,7 +8,8 @@ module.exports = {
     get: {handlers: routes.status, public: true},
   },
   '/hello/public': {
-    get: {handlers: routes.hello.public, public: true},
+    get  : {handlers: routes.hello.public, public: true},
+    post : {handlers: routes.hello.post, public: true},
   },
   '/hello/private': {
     get: {handlers: routes.hello.private},
